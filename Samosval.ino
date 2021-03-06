@@ -1,7 +1,6 @@
-#imclude <Servo.h>
+#include <Servo.h>
 
 B1 = A0;
-B2 = A1;
 
 void setup() {
   // put your setup code here, to run once:
