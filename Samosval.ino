@@ -4,12 +4,20 @@ Servo SD;
 
 int B1       = A0;
 
+int S1       = A1;
+int S2       = A2;
+
 int PIN_ECHO1 = 11;
 int PIN_TRIG1 = 12;
 int PIN_ECHO2 = 13;
 int PIN_TRIG2 = 14;
-bool state = 0;
 
+int MAB       =  2;
+int MAA       =  3;
+int MBB       =  4;
+int MBA       =  5;
+
+bool state    =  0;
 
 long duration1,cm1,cm2,duration2;
 
@@ -19,11 +27,19 @@ void setup() {
   Serial.println("Слава Кайзеру");
   SD.attach(20);
   SD.write(0);
+  
   pinMode(PIN_ECHO1,INPUT);
   pinMode(PIN_TRIG1,OUTPUT);
   pinMode(PIN_ECHO2,INPUT);
   pinMode(PIN_TRIG2,OUTPUT);
   
+  pinMode(MAA, OUTPUT);
+  pinMode(MAB, OUTPUT);
+  pinMode(MBB, OUTPUT);
+  pinMode(MBA, OUTPUT);
+  
+  pinMode(S1,INPUT);
+  pinMode(S2,INPUT);
 }
 
 void dist1() {
@@ -55,17 +71,37 @@ void dist2() {
 }
 
 void forward(){
+  digitalWrite(MAA, 1);
+  digitalWrite(MAB, 0);
+  digitalWrite(MBA, 1);
+  digitalWrite(MBB, 0);
+  delay(100);
 }
 
 
 void left(){
+  digitalWrite(MAA, 1);
+  digitalWrite(MAB, 0);
+  digitalWrite(MBA, 0);
+  digitalWrite(MBB, 0);
+  delay(100);
 }
 
 
 void right(){
+  digitalWrite(MAA, 0);
+  digitalWrite(MAB, 0);
+  digitalWrite(MBA, 1);
+  digitalWrite(MBB, 0);
+  delay(100);
 }
 
 void back(){
+  digitalWrite(MAA, 0);
+  digitalWrite(MAB, 1);
+  digitalWrite(MBA, 0);
+  digitalWrite(MBB, 1);
+  delay(100);
 }
 
 void maykosnvkl(){
@@ -74,14 +110,10 @@ void maykosnvkl(){
 void maykosnvikl(){
 }
 
-void maykrezervvkl(){
-}
-
-void maykrezervvikl(){
-}
-
 void loop() {
-  
+  while(digitalRead(B1) == 0 or data == 0){
+    delay(100);
+  }
   
   
 }
