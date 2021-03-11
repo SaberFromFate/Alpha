@@ -2,10 +2,10 @@
 
 Servo SD;
 
-int B1       = A0;
+int B1        = A0;
 
-int S1       = A1;
-int S2       = A2;
+int S1        = A1;
+int S2        = A2;
 
 int PIN_ECHO1 = 11;
 int PIN_TRIG1 = 12;
@@ -18,6 +18,8 @@ int MBB       =  4;
 int MBA       =  5;
 
 bool state    =  0;
+
+long val      =  0;
 
 long duration1,cm1,cm2,duration2;
 
@@ -65,11 +67,27 @@ void dist2() {
   duration2 = pulseIn(PIN_ECHO2, HIGH);
   cm2 = (duration2 / 2) / 29.1;
   if (cm2 <= 30){
-    state = 1;
+    return 1;
+  }
+  else{
+    return 0;
   }
   delay(100);
 }
 
+void search(){
+  while(anlogRead(S1) <= val && analogRead(S2) <= val){
+    left();
+  }
+}
+void cargo(){
+  for (int i = 0, i <=80, i = i +20){
+    SD.write(i);
+    delay(500);
+  }
+  delay(1000);
+  SD.write(0);
+}
 void forward(){
   digitalWrite(MAA, 1);
   digitalWrite(MAB, 0);
@@ -86,7 +104,6 @@ void left(){
   digitalWrite(MBB, 0);
   delay(100);
 }
-
 
 void right(){
   digitalWrite(MAA, 0);
@@ -109,11 +126,26 @@ void maykosnvkl(){
 
 void maykosnvikl(){
 }
+void maykstartvkl(){
+}
+void maykstartvikl(){
+}
 
 void loop() {
+  maykstartvikl();
+  maykosnvkl();
   while(digitalRead(B1) == 0 or data == 0){
     delay(100);
   }
-  
-  
+  search();
+  while (dist1()==0 && dist2()==0){
+    forward();
+  }
+  cargo();
+  maykosnvikl();
+  maykstartvikl();
+  search();
+  while (dist1()==0 && dist2()==0){
+    forward();
+  }  
 }
