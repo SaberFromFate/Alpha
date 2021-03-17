@@ -17,7 +17,6 @@ int MAA       =  3;
 int MBB       =  4;
 int MBA       =  5;
 
-bool state    =  0;
 
 long val      =  0;
 
@@ -44,7 +43,7 @@ void setup() {
   pinMode(S2,INPUT);
 }
 
-void dist1() {
+int dist1() {
   digitalWrite(PIN_TRIG1, LOW);
   delayMicroseconds(5);
   digitalWrite(PIN_TRIG1, HIGH);
@@ -58,7 +57,7 @@ void dist1() {
   delay(100);
 }
 
-void dist2() {
+int dist2() {
   digitalWrite(PIN_TRIG2, LOW);
   delayMicroseconds(5);
   digitalWrite(PIN_TRIG2, HIGH);
@@ -76,7 +75,7 @@ void dist2() {
 }
 
 void search(){
-  while(anlogRead(S1) <= val && analogRead(S2) <= val){
+  while(digitalRead(S1) <= val && digitalRead(S2) <= val){
     left();
   }
 }
@@ -101,13 +100,13 @@ void left(){
   digitalWrite(MAA, 1);
   digitalWrite(MAB, 0);
   digitalWrite(MBA, 0);
-  digitalWrite(MBB, 0);
+  digitalWrite(MBB, 1);
   delay(100);
 }
 
 void right(){
   digitalWrite(MAA, 0);
-  digitalWrite(MAB, 0);
+  digitalWrite(MAB, 1);
   digitalWrite(MBA, 1);
   digitalWrite(MBB, 0);
   delay(100);
@@ -145,7 +144,7 @@ void loop() {
   maykosnvikl();
   maykstartvikl();
   search();
-  while (dist1()==0 && dist2()==0){
+  while (dist1()==0 && dist2()= =0){
     forward();
   }  
 }
