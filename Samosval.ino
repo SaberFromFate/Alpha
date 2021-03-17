@@ -131,6 +131,9 @@ void maykstartvikl(){
 }
 
 void loop() {
+  while(!Serial.avaible){
+    delay(100);
+  }
   maykstartvikl();
   maykosnvkl();
   while(digitalRead(B1) == 0 or data == 0){
