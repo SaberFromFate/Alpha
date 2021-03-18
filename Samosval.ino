@@ -80,9 +80,10 @@ void search(){
   }
 }
 void cargo(){
-  for (int i = 0, i <=80, i = i +20){
+  int i = 0;
+  for (int i = 0; i <=80; i = i +10){
     SD.write(i);
-    delay(500);
+    delay(300);
   }
   delay(1000);
   SD.write(0);
