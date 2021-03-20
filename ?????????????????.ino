@@ -24,8 +24,6 @@ void setup() {
   
   pinMode(PIN_ECHO1,INPUT);
   pinMode(PIN_TRIG1,OUTPUT);
-  pinMode(PIN_ECHO2,INPUT);
-  pinMode(PIN_TRIG2,OUTPUT);
   
   pinMode(MAA, OUTPUT);
   pinMode(MAB, OUTPUT);
