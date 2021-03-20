@@ -52,7 +52,7 @@ int dist() {
     return 1;
   }
   else{
-   return 0
+   return 0;
   }
 }
 
@@ -63,7 +63,6 @@ void search(){
   }
 }
 void cargo(){
-  int i = 0;
   for (int i = 0; i <=80; i = i +10){
     SD.write(i);
     delay(300);
