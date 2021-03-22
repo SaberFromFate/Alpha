@@ -17,6 +17,9 @@ Servo SD;
 void setup() {
   Serial.begin(9600);
   Serial.println("Слава Кайзеру");
+  Serial1.begin(9600);
+  Serial2.begin(9600);
+  
   SD.attach(20);
   SD.write(0);
   
@@ -53,7 +56,7 @@ int dist() {
 
 
 void search(){
-  while(digitalRead(S1) ==0 || digitalRead(S2) == 0){
+  while(digitalRead(S1) == 0 || digitalRead(S2) == 0){
     left();
   }
 }
@@ -99,37 +102,27 @@ void back(){
 }
 
 void data(){
-  if(Serial.read==1){
+  if(Serial2.read==1){
     return 1;
   }
 }
 
-void maykosnvkl(){
-}
 
-void maykosnvikl(){
-}
-void maykstartvkl(){
-}
-void maykstartvikl(){
-}
 
 void loop() {
-  #Сюда нужно вставить кусок кода который будет ждать передачи координат( 1 ) по блютуз
-  maykstartvikl();
-  maykosnvkl();
   while(data == 0){
     delay(100);
   }
+  Serial1.writeln("1");
   search();
   while (dist()==0){
     forward();
   }
   cargo();
-  maykosnvikl();
-  maykstartvikl();
+  Serial1.writeln("2");
   search();
   while (dist()==0){
     forward();
-  }  
+  }
+  Serial.writeln("0");
 }
