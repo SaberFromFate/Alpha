@@ -1,11 +1,6 @@
 #include <Servo.h>
 
-#Нужен код для радиомодуля
-#Нужен код для блютуз передачи
-
 Servo SD;
-
-#define B1  A0
 
 #define S1    A1
 #define S2    A2
@@ -103,6 +98,12 @@ void back(){
   delay(100);
 }
 
+void data(){
+  if(Serial.read==1){
+    return 1;
+  }
+}
+
 void maykosnvkl(){
 }
 
@@ -117,7 +118,7 @@ void loop() {
   #Сюда нужно вставить кусок кода который будет ждать передачи координат( 1 ) по блютуз
   maykstartvikl();
   maykosnvkl();
-  while(digitalRead(B1) == 0 or data == 0){
+  while(data == 0){
     delay(100);
   }
   search();
